@@ -2,7 +2,9 @@ from dronekit import LocationGlobal, LocationGlobalRelative
 from connect import connectCopter
 from arm_takeoff import armCopter, takeoffCopter
 from goto import goto
+from land import land
 import argparse
+import time
 
 # ------------------ Main Executable ------------------
 # Creating a argument that enables the ip address to be parsed from the command line 
@@ -32,5 +34,11 @@ if tk_option=='Y':
 # Flying to Waypoint
 print('Initializing Mission')
 wp1 = LocationGlobalRelative(-20.5399243538212,-47.36084905761948,30)
-
 goto(copter,wp1)
+
+# Landing the vehicle
+land(copter)
+
+# Waiting for manual exit
+while True:
+    time.sleep(1)
