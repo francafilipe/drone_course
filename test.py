@@ -1,5 +1,7 @@
+from dronekit import LocationGlobal, LocationGlobalRelative
 from connect import connectCopter
 from arm_takeoff import armCopter, takeoffCopter
+from goto import goto
 import argparse
 
 # ------------------ Main Executable ------------------
@@ -17,7 +19,7 @@ armCopter(copter)
 
 # Takeoff
 while True:
-    tk_option = input('Takeoff? [Y/N]').upper()
+    tk_option = input('Proceed to Takeoff? [Y/N] ').upper()
     if tk_option=='Y' or tk_option=='N':
         break
     else:
@@ -26,3 +28,9 @@ while True:
 if tk_option=='Y':
     targetHeight = int(input('Desired Takeoff Height [m]: '))
     takeoffCopter(copter,targetHeight)
+
+# Flying to Waypoint
+print('Initializing Mission')
+wp1 = LocationGlobalRelative(-20.5399243538212,-47.36084905761948,30)
+
+goto(copter,wp1)
